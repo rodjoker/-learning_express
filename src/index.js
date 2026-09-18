@@ -24,7 +24,7 @@ app.use('/', rootRoutes);
 app.use('/users', userRoutes);
 
 // 4. Montaje de las rutas de autenticación (Etapa 3)
-app.use('/login', authRoutes);
+app.use('/', authRoutes);
 
 // 5. Middleware central de manejo de errores (4 parámetros)
 app.use(errorHandler);

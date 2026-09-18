@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const validate = require('../middlewares/validate');
 const { createUserSchema, updateUserSchema } = require('../schemas/user.schema');
+const  verifyToken  = require('../middlewares/verifyToken');
 
 // 1. POST /users — Crea usuario
 router.post('/', validate(createUserSchema), async (req, res, next) => {
@@ -33,6 +34,21 @@ router.get('/', async (req, res, next) => {
   try {
     const users = await User.find();
     res.json(users);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/me', verifyToken, async (req, res, next) => {
+  try {
+    // req.user.id fue inyectado por el middleware verifyToken
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      const error = new Error('Usuario no encontrado');
+      error.status = 404;
+      return next(error);
+    }
+    res.json(user);
   } catch (error) {
     next(error);
   }

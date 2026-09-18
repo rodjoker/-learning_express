@@ -3,34 +3,10 @@ const router = express.Router();
 const validate = require('../middlewares/validate');
 const { loginSchema } = require('../schemas/auth.schema');
 const User = require('../models/User');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
-
-router.post('/', validate(loginSchema), async (req, res, next) => {
-//   try {
-//     const { email } = req.body;
-
-//     const user = await User.findOne({ email });
-//     if (!user) {
-//       const error = new Error('Credenciales inválidas');
-//       error.status = 401;
-//       return next(error);
-//     }
-
-//     const isMatch = await bcrypt.compare(password, user.password);
-//     if (!isMatch) {
-//       const error = new Error('Credenciales inválidas');
-//       error.status = 401;
-//       return next(error);
-//     }
-
-//     jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' })
-//     res.status(201).json(user);
-//   } catch (error) {
-//     next(error);
-//   }
     
 router.post('/login', validate(loginSchema), async (req, res, next) => {
   try {
@@ -65,6 +41,6 @@ router.post('/login', validate(loginSchema), async (req, res, next) => {
   }
 });
 
-});
+
 
 module.exports = router;
