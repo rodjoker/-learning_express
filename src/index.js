@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/users.routes');
 const rootRoutes = require('./routes/root.routes');
+const authRoutes = require('./routes/auth.routes');
 const errorHandler = require('./middlewares/errorHandler');
 
 dotenv.config();
@@ -21,6 +22,9 @@ app.use('/', rootRoutes);
 
 // 4. Montaje de las rutas del CRUD de usuarios (Etapa 2)
 app.use('/users', userRoutes);
+
+// 4. Montaje de las rutas de autenticación (Etapa 3)
+app.use('/login', authRoutes);
 
 // 5. Middleware central de manejo de errores (4 parámetros)
 app.use(errorHandler);

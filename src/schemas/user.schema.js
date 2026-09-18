@@ -20,6 +20,8 @@ const createUserSchema = z.object({
 // Usamos .partial() para que los campos sean opcionales al actualizar
 const updateUserSchema = createUserSchema.partial();
 
+
+
 module.exports = {
   createUserSchema,
   updateUserSchema,
