@@ -14,7 +14,7 @@ router.post('/login', validate(loginSchema), async (req, res, next) => {
     const { email, password } = req.body;
 
     // 2. Buscar usuario por email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+password');
     if (!user) {
       const error = new Error('Credenciales inválidas');
       error.status = 401;
